@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Happy Birthday Saanvi 🎀</title>
+
+<style>
+body{
+  margin:0;
+  padding:0;
+  font-family:'Comic Sans MS', cursive;
+  text-align:center;
+  background:linear-gradient(to right,#ffd6e8,#c8e7ff);
+  overflow:hidden;
+  color:#ff4d8d;
+}
+
+/* Stars */
+.star{
+  position:fixed;
+  width:3px;
+  height:3px;
+  background:white;
+  border-radius:50%;
+  animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+  from{opacity:0.2;}
+  to{opacity:1;}
+}
+
+h1{
+  margin-top:30px;
+}
+
+.slider{
+  width:260px;
+  height:260px;
+  margin:20px auto;
+  overflow:hidden;
+  border-radius:25px;
+  box-shadow:0 0 20px rgba(0,0,0,0.2);
+}
+
+.slides{
+  display:flex;
+  animation:slide 12s infinite;
+}
+
+.slides img{
+  width:260px;
+  height:260px;
+  object-fit:cover;
+}
+
+@keyframes slide{
+  0%{transform:translateX(0);}
+  33%{transform:translateX(-260px);}
+  66%{transform:translateX(-520px);}
+  100%{transform:translateX(0);}
+}
+
+button{
+  padding:12px 25px;
+  font-size:18px;
+  border:none;
+  border-radius:30px;
+  background:#ff85a2;
+  color:white;
+  cursor:pointer;
+  margin-top:20px;
+}
+
+#message{
+  margin-top:20px;
+  padding:0 20px;
+  font-size:18px;
+  min-height:60px;
+}
+
+/* Hearts */
+.heart{
+  position:fixed;
+  top:-10px;
+  font-size:20px;
+  animation:fall 5s linear infinite;
+}
+
+@keyframes fall{
+  to{transform:translateY(100vh);}
+}
+
+/* Confetti */
+.confetti{
+  position:fixed;
+  width:8px;
+  height:8px;
+  top:-10px;
+  animation:confall 4s linear infinite;
+}
+
+@keyframes confall{
+  to{transform:translateY(100vh) rotate(360deg);}
+}
+
+/* Teddy */
+.teddy{
+  font-size:50px;
+  animation:bounce 2s infinite;
+  margin-top:10px;
+}
+
+@keyframes bounce{
+  0%{transform:translateY(0);}
+  50%{transform:translateY(-10px);}
+  100%{transform:translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<h1>Happy Birthday 🎂💖</h1>
+<h2>Saanvi 🌸</h2>
+
+<div class="slider">
+  <div class="slides">
+    <img src="photo1.jpeg">
+    <img src="photo2.jpeg">
+    <img src="photo3.jpeg">
+  </div>
+</div>
+
+<div class="teddy">🐻🎀</div>
+
+<button onclick="surprise()">Open Surprise 🎁</button>
+
+<div id="message"></div>
+
+<audio autoplay loop>
+  <source src="birthday.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// Twinkling stars
+for(let i=0;i<80;i++){
+  let star=document.createElement("div");
+  star.classList.add("star");
+  star.style.left=Math.random()*100+"vw";
+  star.style.top=Math.random()*100+"vh";
+  star.style.animationDuration=(Math.random()*2+1)+"s";
+  document.body.appendChild(star);
+}
+
+function surprise(){
+  startConfetti();
+  let text="You are the cutest soul ever 🐰💗 Thank you for being my best friend and my favorite person to laugh with 🌸✨ I hope your life is filled with happiness, dreams, and endless smiles 🎂💖";
+  let i=0;
+  function typing(){
+    if(i<text.length){
+      document.getElementById("message").innerHTML+=text.charAt(i);
+      i++;
+      setTimeout(typing,40);
+    }
+  }
+  typing();
+}
+
+// Floating hearts
+setInterval(function(){
+  let heart=document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML="💖";
+  heart.style.left=Math.random()*100+"vw";
+  document.body.appendChild(heart);
+  setTimeout(()=>{heart.remove();},5000);
+},700);
+
+function startConfetti(){
+  for(let i=0;i<80;i++){
+    let c=document.createElement("div");
+    c.classList.add("confetti");
+    c.style.left=Math.random()*100+"vw";
+    c.style.backgroundColor=`hsl(${Math.random()*360},100%,70%)`;
+    c.style.animationDuration=(Math.random()*3+2)+"s";
+    document.body.appendChild(c);
+  }
+}
+</script>
+
+</body>
+</html>

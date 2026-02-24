@@ -9,16 +9,35 @@ body{
   margin:0;
   font-family:'Poppins', sans-serif;
   min-height:100vh;
-  background: linear-gradient(to bottom,
-      #ffb3d9,
-      #ffc8dd,
-      #bde0fe,
-      #a2d2ff);
+  background: linear-gradient(to bottom,#ffb3d9,#ffc8dd,#bde0fe,#a2d2ff);
   background-attachment: fixed;
-  background-size: cover;
   overflow:hidden;
   color:white;
   text-align:center;
+}
+
+/* MARQUEE (ONLY PAGE1) */
+.marquee{
+  position:absolute;
+  top:15px;
+  width:100%;
+  overflow:hidden;
+  white-space:nowrap;
+  z-index:10;
+}
+.marquee span{
+  display:inline-block;
+  padding-left:100%;
+  font-size:2.5rem;
+  font-weight:bold;
+  animation:scrollText 12s linear infinite;
+  background: linear-gradient(90deg, red, orange, yellow, green, cyan, blue, violet);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+@keyframes scrollText{
+  0%{transform:translateX(0);}
+  100%{transform:translateX(-100%);}
 }
 
 /* SECTION */
@@ -35,20 +54,24 @@ body{
 
 #page1{ transform:translateX(0); }
 #page2{ transform:translateX(100%); }
+#page3{ transform:translateX(200%); }
 
 .active-page2 #page1{ transform:translateX(-100%); }
 .active-page2 #page2{ transform:translateX(0); }
 
-/* BIG PARAGRAPH */
+.active-page3 #page2{ transform:translateX(-100%); }
+.active-page3 #page3{ transform:translateX(0); }
+
+/* TEXT */
 p{
-  font-size:1.6rem;
-  line-height:2;
-  max-width:850px;
+  font-size:1.8rem;
+  line-height:2.1;
+  max-width:900px;
 }
 
-/* GLOW TITLE */
+/* TITLES */
 .glow-title{
-  font-size:3.5rem;
+  font-size:3.2rem;
   font-weight:800;
   text-shadow:
     0 0 10px #ff9ecf,
@@ -57,100 +80,52 @@ p{
     0 0 50px #74c0fc;
   animation: glowPulse 3s infinite ease-in-out;
 }
-
 @keyframes glowPulse{
   0%{ text-shadow:0 0 10px #ff9ecf,0 0 20px #ff6ec7; }
   50%{ text-shadow:0 0 25px #a0d8ff,0 0 40px #74c0fc; }
   100%{ text-shadow:0 0 10px #ff9ecf,0 0 20px #ff6ec7; }
 }
 
-/* PAGE1 PHOTOS */
-.photos{
-  display:flex;
-  gap:30px;
-  margin-bottom:20px;
+/* MEDIA */
+.photos,.media-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:25px;
+  margin-bottom:25px;
 }
-
-.photos img{
-  width:250px;
-  height:350px;
-  object-fit:contain;
+.photos img,
+.media-grid img,
+.media-grid video{
+  width:230px;
+  height:320px;
+  object-fit:cover;
   border-radius:20px;
   box-shadow:0 15px 35px rgba(0,0,0,0.4);
 }
 
-/* PAGE2 GRID */
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(3, 1fr);
-  grid-template-rows:repeat(2, auto);
-  gap:20px;
-  width:90%;
-  margin-bottom:30px;
-}
-
-.gallery img{
-  width:100%;
-  height:260px;
-  object-fit:cover;
-  border-radius:20px;
-  box-shadow:0 15px 30px rgba(0,0,0,0.4);
-  transition:0.4s ease;
-}
-
-.gallery img:hover{
-  transform:scale(1.08);
-  box-shadow:0 20px 40px rgba(0,0,0,0.6);
-}
-
 /* BUTTON */
 button{
-  padding:14px 30px;
-  font-size:1.2rem;
+  padding:14px 32px;
+  font-size:18px;
   border:none;
   border-radius:30px;
   background:#ff4d8d;
   color:white;
   cursor:pointer;
-  margin-top:20px;
-  transition:0.3s;
+  margin-top:15px;
 }
 
-button:hover{
-  transform:scale(1.05);
-}
-
-/* PAGE2 BLUE HEARTS */
-.blue-heart{
+/* HEARTS & STARS */
+.heart,.star{
   position:fixed;
+  top:-20px;
   font-size:22px;
-  animation:fall 6s linear infinite;
+  z-index:0;
+  pointer-events:none;
 }
-
 @keyframes fall{
   from{transform:translateY(-10vh);}
   to{transform:translateY(110vh);}
-}
-
-/* STARS */
-.star{
-  position:fixed;
-  font-size:18px;
-  animation:fall 7s linear infinite;
-}
-
-/* FIREWORK */
-.firework{
-  position:fixed;
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  animation:explode 1s ease-out forwards;
-}
-
-@keyframes explode{
-  0%{transform:scale(1);}
-  100%{transform:scale(25); opacity:0;}
 }
 </style>
 </head>
@@ -161,6 +136,9 @@ button:hover{
 
 <!-- PAGE 1 -->
 <div class="section" id="page1">
+  <div class="marquee">
+    <span>🎉 HAPPY BIRTHDAY TO YOU SANJAM PANTA 💖🥳 🎉</span>
+  </div>
 
   <div class="photos">
     <img src="photo1.jpeg">
@@ -169,101 +147,121 @@ button:hover{
   </div>
 
   <h1 class="glow-title">🎂 Happy Birthday 🎂</h1>
-  <h2 style="font-size:2rem;">Saanvi 💖</h2>
 
-  <p>
-    On your special day, I just want to say…<br><br>
-    You are one of the most beautiful souls I know ✨<br>
-    May your life be filled with love, happiness, success
-    and endless magical moments 💕<br><br>
-    I’ll always support you no matter what 💗
-  </p>
+  <p>Your beautiful message here...</p>
 
-  <button onclick="startMagic()">Tap For Magic ✨</button>
+  <button onclick="playMusic()">Tap For Magic ✨</button>
   <button onclick="nextPage()">Next 💌</button>
-
 </div>
 
 <!-- PAGE 2 -->
 <div class="section" id="page2">
-
-  <div class="gallery">
+<h1 class="glow-title">Our Little World 💙</h1>
+  
+  <div class="media-grid">
     <img src="photo4.jpeg">
     <img src="photo5.jpeg">
+    <video src="video1.mp4" controls></video>
+
     <img src="photo6.jpeg">
+    <video src="video2.mp4" controls></video>
     <img src="photo7.jpeg">
+
+    <video src="video3.mp4" controls></video>
     <img src="photo8.jpeg">
     <img src="photo9.jpeg">
   </div>
-
-  <h1 style="font-size:2.5rem;">Our Little World 💛</h1>
-
-  <p>
-Happy Birthday to you, our most special person 🎂💖<br><br>
-We three talk every single evening, and whenever we get time, we talk again.  
-Honestly, I can’t even sleep without talking to you both 💙<br><br>
-We laugh together, talk endlessly, get annoyed sometimes…  
-but still come back to each other again and again.<br><br>
-You are my comfort, my daily happiness, my safe place ✨  
-Our friendship means more than words can explain 💖
-  </p>
-
+  
+  <button onclick="nextPage2()">Next 💙</button>
   <button onclick="prevPage()">Previous ⬅</button>
+</div>
 
+<!-- PAGE 3 -->
+<div class="section" id="page3" style="background:linear-gradient(to bottom,#a2d2ff,#bde0fe);">
+  <h1 style="font-size:45px;">Us 💙</h1>
+  <p>Your friendship paragraph here...</p>
+  <button onclick="prevPage3()">Previous ⬅</button>
 </div>
 
 <script>
 
-function startMagic(){
+let pinkInterval, blueInterval, starInterval;
+
+window.onload = function(){
+  pinkInterval = setInterval(createPinkHeart,800);
+  starInterval = setInterval(createStar,700);
+};
+
+function playMusic(){
   document.getElementById("music").play();
+}
+
+function createPinkHeart(){
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="💖";
+  h.style.left=Math.random()*100+"vw";
+  h.style.animation="fall 6s linear";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+}
+
+function createBlueHeart(){
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="🩵";
+  h.style.left=Math.random()*100+"vw";
+  h.style.animation="fall 6s linear";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+}
+
+function createStar(){
+  let s=document.createElement("div");
+  s.className="star";
+  s.innerHTML="✨";
+  s.style.left=Math.random()*100+"vw";
+  s.style.animation="fall 5s linear";
+  document.body.appendChild(s);
+  setTimeout(()=>s.remove(),5000);
 }
 
 function nextPage(){
   document.body.classList.add("active-page2");
-  explodeFireworks();
-  startBlueHearts();
-  startStars();
+  clearInterval(pinkInterval);
+  clearInterval(starInterval);
+  blueInterval=setInterval(createBlueHeart,800);
+}
+
+function nextPage2(){
+  document.body.classList.remove("active-page2");
+  document.body.classList.add("active-page3");
+
+  clearInterval(pinkInterval);
+  clearInterval(blueInterval);
+  clearInterval(starInterval);
+
+  pinkInterval=setInterval(createPinkHeart,800);
+  blueInterval=setInterval(createBlueHeart,900);
+  starInterval=setInterval(createStar,700);
 }
 
 function prevPage(){
   document.body.classList.remove("active-page2");
+  clearInterval(blueInterval);
+  pinkInterval=setInterval(createPinkHeart,800);
+  starInterval=setInterval(createStar,700);
 }
 
-/* Blue Hearts */
-function startBlueHearts(){
-  setInterval(function(){
-    let h=document.createElement("div");
-    h.className="blue-heart";
-    h.innerHTML="💙";
-    h.style.left=Math.random()*100+"vw";
-    document.body.appendChild(h);
-    setTimeout(()=>{h.remove();},6000);
-  },600);
-}
+function prevPage3(){
+  document.body.classList.remove("active-page3");
+  document.body.classList.add("active-page2");
 
-/* Stars */
-function startStars(){
-  setInterval(function(){
-    let s=document.createElement("div");
-    s.className="star";
-    s.innerHTML="✨";
-    s.style.left=Math.random()*100+"vw";
-    document.body.appendChild(s);
-    setTimeout(()=>{s.remove();},7000);
-  },800);
-}
+  clearInterval(pinkInterval);
+  clearInterval(blueInterval);
+  clearInterval(starInterval);
 
-/* Fireworks */
-function explodeFireworks(){
-  for(let i=0;i<30;i++){
-    let f=document.createElement("div");
-    f.className="firework";
-    f.style.left=Math.random()*100+"vw";
-    f.style.top=Math.random()*100+"vh";
-    f.style.backgroundColor=`hsl(${Math.random()*360},100%,60%)`;
-    document.body.appendChild(f);
-    setTimeout(()=>{f.remove();},1000);
-  }
+  blueInterval=setInterval(createBlueHeart,800);
 }
 
 </script>
